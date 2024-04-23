@@ -27,3 +27,19 @@ func (s ConfigGroupService) Delete(name string, version int) error {
 	}
 	return nil
 }
+
+func (s ConfigGroupService) AddConfigToGroup(group model.ConfigGroup, config model.Config) error {
+	err := s.repo.AddConfigToGroup(group, config)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s ConfigGroupService) RemoveConfigFromGroup(group model.ConfigGroup, key string) error {
+	err := s.repo.RemoveConfigFromGroup(group, key)
+	if err != nil {
+		return err
+	}
+	return nil
+}

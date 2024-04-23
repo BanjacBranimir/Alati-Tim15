@@ -36,6 +36,17 @@ func (c ConfigGroupInMemRepository) Delete(name string, version int) error {
 	return nil
 }
 
+func (c ConfigGroupInMemRepository) AddConfigToGroup(group model.ConfigGroup, config model.Config) error {
+	key := fmt.Sprintf("%s/%d", config.Name, config.Version)
+	group.Configs[key] = config
+	return nil
+}
+
+func (c ConfigGroupInMemRepository) RemoveConfigFromGroup(group model.ConfigGroup, key string) error {
+	delete(group.Configs, key)
+	return nil
+}
+
 func NewConfigGroupInMemRepository() model.ConfigGroupRepository {
 	return ConfigGroupInMemRepository{
 		configs: make(map[string]model.ConfigGroup),

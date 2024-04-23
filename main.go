@@ -1,6 +1,7 @@
 package main
 
 import (
+	"alati2024/handler"
 	"alati2024/model"
 	"alati2024/repo"
 	"alati2024/service"
@@ -21,6 +22,8 @@ func main() {
 	serviceC := service.NewConfigService(repoC)
 	repoG := repo.NewConfigGroupInMemRepository()
 	serviceG := service.NewConfigGroupService(repoG)
+	h := handler.NewConfigHandler(serviceC)
+	hG := handler.NewConfigGroupHandler(serviceG, serviceC)
 
 	params := make(map[string]string)
 	params["username"] = "pera"
